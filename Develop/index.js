@@ -10,7 +10,7 @@ function thePrompts(){
     return inquirer.prompt([
         {
             type: "input",
-            message: "Please Title Your Project",
+            message: "Project Title",
             name: "theProjectTitle",
             
         },
