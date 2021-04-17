@@ -66,7 +66,7 @@ function thePrompts(){
         const answers = await thePrompts();
         const contentGeneration = generateTheReadme(answers);
         // where writing the new readme
-        await writeTheFile('./develop/THEREADME.md', contentGeneration);
+        await writeTheFile('THEREADME.md', contentGeneration);
         console.log('sucessfully made the read me');
     }   catch(err) {
         console.log(err);
