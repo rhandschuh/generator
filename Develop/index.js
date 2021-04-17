@@ -1,13 +1,89 @@
-// TODO: Include packages needed for this application
+//declaring dependencies with variables
+const generateTheReadme = require("./utils/generateMarkdown.js")
+const writeFileAsync = util.promisify(fs.writeFile);
+const fs = require("fs");
+const util = require("util");
+const inquirer = require("inquirer");
 
-// TODO: Create an array of questions for user input
-const questions = [];
+//prompt for questions here
+function thePrompts(){
+    return inquirer.prompt([
+        {
+            type: "input",
+            message: "Please Title Your Project",
+            name: "theProjectTitle",
+            
+        },
+        {
+            type: "input",
+            name: "theDescription",
+            message: "Description here "
+            
+        },
+        {
+            type: "input",
+            name: "theInstallation",
+            message: "what was your installation process?",
+        },
+        {
+            type: "input",
+            name: "theUsage",
+            message: "What would you use this project for?"
+        },
+        {
+            type: "input",
+            name: "contributing",
+            message: "list contributors for the project"
+        },
+        {
+            type: "input",
+            name: "theTests",
+            message: "are there any tests"
+        },
+        {
+            type: "input",
+            name: "theIssues",
+            message: "list issues here "
+        },
+        {
+            type: "input",
+            name: "theEmail",
+            message: "Put your email here "
+        },
+        {
+            type: "input",
+            name: "username",
+            message: "what is your GitHub username "
+        },
+        {
+            type: "list",
+            name: "license",
+            message: "choose a license ",
+            choices: [
+                "GNU",
+                "ISC",
+                "MIT",
+                "Mozilla",
+                "Open",
+                "Apache",
+                "Academic",
+            ]
+        }
+    ]);
+} 
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
-
-// TODO: Create a function to initialize app
-function init() {}
-
-// Function call to initialize app
-init();
+// Async function using util.promisify 
+  async function init() {
+    try {
+        //asking the questions and generating the response
+        const answers = await thePrompts();
+        const contentGeneration = generateTheReadme(answers);
+        // where writing the new readme
+        await writeFileAsync('./develop/THEREADME.md', contentGeneration);
+        console.log('sucessfully made the read me');
+    }   catch(err) {
+        console.log(err);
+    }
+  }
+  
+  init();  
