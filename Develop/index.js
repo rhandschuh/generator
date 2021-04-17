@@ -1,8 +1,8 @@
 //declaring dependencies with variables
 const generateTheReadme = require("./utils/generateMarkdown.js")
-const writeFileAsync = util.promisify(fs.writeFile);
 const fs = require("fs");
 const util = require("util");
+const writeTheFile = util.promisify(fs.writeFile);
 const inquirer = require("inquirer");
 
 //prompt for questions here
@@ -55,20 +55,7 @@ function thePrompts(){
             name: "username",
             message: "what is your GitHub username "
         },
-        {
-            type: "list",
-            name: "license",
-            message: "choose a license ",
-            choices: [
-                "GNU",
-                "ISC",
-                "MIT",
-                "Mozilla",
-                "Open",
-                "Apache",
-                "Academic",
-            ]
-        }
+       
     ]);
 } 
 
@@ -79,7 +66,7 @@ function thePrompts(){
         const answers = await thePrompts();
         const contentGeneration = generateTheReadme(answers);
         // where writing the new readme
-        await writeFileAsync('./develop/THEREADME.md', contentGeneration);
+        await writeTheFile('./develop/THEREADME.md', contentGeneration);
         console.log('sucessfully made the read me');
     }   catch(err) {
         console.log(err);
