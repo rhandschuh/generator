@@ -59,7 +59,7 @@ function thePrompts(){
     ]);
 } 
 
-// Async function using util.promisify 
+// Async function 
   async function init() {
     try {
         //asking the questions and generating the response
